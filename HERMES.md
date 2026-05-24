@@ -1,67 +1,134 @@
 # babbled notes: Agent Architecture
 
-How babbled notes works as a perception-reasoning-action agent.
+How babbled notes works as a closed-loop perception-reasoning-action agent.
 
 ---
 
-## The loop
+## What makes it an agent
+
+A tool does what you tell it. An agent reads its environment, makes decisions you did not configure, and takes action.
+
+babbled notes is an agent because:
+
+1. **It perceives autonomously.** The DSP layer reads your microphone in real time, identifies pitch, amplitude, and onset events without any user configuration.
+2. **It decides without instruction.** You never choose a mood, a voice, or a musical key. Gemma 4 decides all of that from what it heard.
+3. **It acts on its own output.** The synthesizer plays a composition. You did not compose it.
+4. **It loops.** After the action, the user can correct the agent's interpretation. The agent re-renders. The loop runs again.
+
+---
+
+## State machine
+
+The NeuralGem is the agent's interface. It has four states:
 
 ```
-PERCEIVE  →  REASON  →  ACT  →  REFLECT  →  (repeat)
+IDLE  ----tap---->  RECORDING  ----tap---->  PROCESSING  ----result---->  PLAYING
+ ^                                                                            |
+ |                                                                            |
+ +---------------------------"new seed"--------------------------------------+
 ```
 
-Every time a user makes a sound, the agent runs this full loop. One sound in. One composition out.
+Each state is visually distinct on the canvas:
+
+| State | Visual | What the agent is doing |
+|---|---|---|
+| IDLE | Breathing silver ring | Waiting for input |
+| RECORDING | Crystallizing polygon, purple to cyan | Running FFT + onset detection in real time |
+| PROCESSING | Hexagon forming | Sending audio + DSP digest to Gemma 4 |
+| PLAYING | Locked hexagon, mood-colored facets | Rendering Lilt score through synthesizer |
+
+For users who cannot read or who have cognitive differences: the color and shape carry all the information. No text labels required to understand what the agent is doing.
 
 ---
 
 ## 1. Perception layer
 
-**What it does:** Captures raw mic input and converts it into a structured digest the reasoning engine can read.
+**Goal:** Convert raw mic input into a structured digest Gemma 4 can reason about.
 
-**Implementation:** Web Audio API
+**Implementation:** `src/lib/dspAnalyzer.ts`
+
+### Signal chain
 
 ```
-AnalyserNode (FFT)         pitch detection via frequency bin peak
-ScriptProcessorNode (RMS)  amplitude envelope over time
-Onset detector             detects new note events by amplitude jump threshold
+Microphone  ->  MediaStreamSource  ->  AnalyserNode (FFT 256)  ->  ScriptProcessor
+                                                                          |
+                                                                    RMS amplitude
+                                                                    FFT peak bin
+                                                                    Onset detection
+                                                                          |
+                                                                     DspEvent[]
 ```
 
-**Output:** `DspDigest` -- a JSON object:
+### Onset detection
+
+An onset is detected when RMS amplitude crosses 0.1 and at least 100ms have passed since the last onset:
+
+```typescript
+if (rms > 0.1 && elapsed - lastOnset > 0.1) {
+  let peakIdx = 1;
+  for (let i = 2; i < freqData.length; i++) {
+    if (freqData[i] > freqData[peakIdx]) peakIdx = i;
+  }
+  const freq = (peakIdx / freqData.length) * nyquist;
+  events.push({ time: elapsed, frequency: freq, pitchName: freqToNote(freq), amplitude: rms });
+  lastOnset = elapsed;
+}
+```
+
+This threshold is intentionally low. A breath barely registers above 0.02 RMS in a quiet room. The agent is tuned to hear the quietest inputs -- not the loudest.
+
+### Pitch estimation
+
+```typescript
+function freqToNearestNote(freq: number): string {
+  const midi = Math.round(12 * Math.log2(freq / 440) + 69);
+  const clamped = Math.max(0, Math.min(127, midi));
+  return `${names[clamped % 12]}${Math.floor(clamped / 12) - 1}`;
+}
+```
+
+Converts the FFT peak bin frequency to the nearest MIDI note name (e.g. 220 Hz = A3).
+
+### DspDigest output
 
 ```typescript
 interface DspDigest {
-  duration: number;           // total recording length in seconds
-  dominantFreq: number;       // Hz of strongest frequency bin
-  dominantPitch: string;      // e.g. "A3", "C4"
-  avgAmplitude: number;       // 0.0 to 1.0 RMS average
-  tempoEstimate: number;      // BPM estimate from onset intervals
-  events: DspEvent[];         // timestamped onset array
+  duration: number;       // total recording length in seconds
+  averageEnergy: number;  // mean RMS across all events
+  peakOnsetCount: number; // number of onset events detected
+  events: DspEvent[];     // timestamped onset array
 }
 
 interface DspEvent {
-  time: number;               // seconds from recording start
-  frequency: number;          // Hz at onset
-  pitchName: string;          // note name
-  amplitude: number;          // 0.0 to 1.0 at onset
+  time: number;           // seconds from recording start
+  frequency: number;      // Hz at onset peak
+  pitchName: string;      // nearest note name
+  amplitude: number;      // RMS at onset
 }
 ```
 
-The perception layer runs in real time during recording. When the user taps to stop, the digest is complete.
+The DSP digest is a compressed, structured summary of what the user produced. It reduces the audio to the events that matter for musical interpretation.
 
 ---
 
-## 2. Reasoning engine
+## 2. Reasoning layer
 
-**What it does:** Reads the DspDigest and raw audio, reasons about the user's intent, outputs a Lilt musical score.
+**Goal:** Read the DSP digest and raw audio, reason about the user's intent, produce a Lilt musical score.
 
-**Implementation:** Gemma 4 (`gemma-4-26b-a4b-it`) via `@google/genai` SDK
+**Implementation:** `server.ts` -- Express POST `/api/interpret`
 
-**Inputs sent to the model simultaneously:**
-- `audioBase64`: the raw WebM audio, base64-encoded
-- `dspDigest`: the structured analysis from the perception layer
-- `userPrompt`: optional intent hint from the user ("make it a cello", "slow and gentle")
+### Why both audio and DSP digest
 
-**System prompt contract (The Lilt Contract):**
+The agent sends two inputs to Gemma 4 simultaneously:
+
+- **Raw audio (base64 WebM):** Gemma 4 can hear the actual sound -- the texture, the breath noise, the quality of the tone. A tremor in a hum has a different audio texture than a steady hum, even if the pitch is the same.
+- **DspDigest (JSON):** Structured data the model can reason about precisely. Onset count, timing intervals, amplitude envelope. The model doesn't have to estimate these -- they are given.
+
+Neither input alone is complete. The audio captures what structured analysis misses. The digest captures what audio analysis makes vague.
+
+### The Lilt Contract
+
+The system prompt defines a contract the agent must follow:
 
 ```
 If the sound is slow, soft, or hummed:
@@ -79,7 +146,11 @@ Align timestamps to DSP onsets but make them musically polished.
 Always include a drone note layer with voice "synthesizer ambient".
 ```
 
-**Output:** JSON Lilt score
+This is not a rigid classifier. Gemma 4 reads these as guidelines, not switch cases. A tremor-affected tap might produce "pensive" + "grand piano" + "legato" -- the agent decides the tremor is closer to a hum than a click.
+
+### Response structure
+
+The model outputs a Lilt score -- a structured JSON object:
 
 ```json
 {
@@ -89,82 +160,147 @@ Always include a drone note layer with voice "synthesizer ambient".
   "liltCode": "A3 ! soft @ 0.00s\nC4 ! normal @ 1.20s",
   "notes": [
     { "note": "A3", "duration": 1.2, "velocity": "soft", "time": 0.0 },
-    { "note": "C4", "duration": 0.8, "velocity": "normal", "time": 1.2, "voice": "synthesizer ambient" }
+    { "note": "C4", "duration": 0.8, "velocity": "normal", "time": 1.2 },
+    { "note": "A2", "duration": 3.5, "velocity": "soft", "time": 0.0, "voice": "synthesizer ambient" }
   ],
   "explanation": "A slow exhale, barely a sound. But steady. Like resolve."
 }
 ```
 
-The model runs server-side. The API key never reaches the browser.
+Every field is a decision the agent made. The user did not choose "A3" or "legato" or "cinematic cello". The agent chose them.
+
+### JSON extraction
+
+Gemma 4 is a thinking model. It generates chain-of-thought reasoning before the output. The server extracts only the JSON object:
+
+```typescript
+const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+if (jsonMatch) rawText = jsonMatch[0];
+const parsed = JSON.parse(rawText);
+```
 
 ---
 
 ## 3. Action layer
 
-**What it does:** Renders the Lilt score as synthesized audio in real time.
+**Goal:** Render the Lilt score as synthesized audio in real time.
 
-**Implementation:** Web Audio API (no external audio library)
+**Implementation:** `src/lib/audioEngine.ts`
 
-Each note in the Lilt score maps to a synthesized voice:
+### Voice synthesis
 
-| Voice | Synthesis method |
-|---|---|
-| `grand piano` | OscillatorNode (triangle) + envelope |
-| `cinematic cello` | OscillatorNode (sawtooth) + low-pass filter |
-| `marimba` | OscillatorNode (sine) + fast decay envelope |
-| `drum kit` | White noise burst + band-pass filter |
-| `synthesizer ambient` | OscillatorNode (sine) + long release, low gain |
+Each Lilt voice maps to a Web Audio API synthesis chain:
 
-Each note is scheduled via `AudioContext.currentTime` using the `time` field from the Lilt score. Notes play at the exact offset the agent specified.
+| Voice | Oscillator | Filter | Envelope |
+|---|---|---|---|
+| `grand piano` | Triangle | None | Fast attack, medium decay |
+| `cinematic cello` | Sawtooth | Low-pass 800Hz | Slow attack, long release |
+| `marimba` | Sine | None | Very fast decay (0.3s) |
+| `drum kit` | White noise | Band-pass 200Hz | Instant attack, very fast decay |
+| `synthesizer ambient` | Sine | None | Long attack, very long release, low gain |
+
+### Scheduling
+
+Notes are scheduled using `AudioContext.currentTime`:
+
+```typescript
+const startAt = this.audioCtx.currentTime + note.time;
+oscillator.start(startAt);
+oscillator.stop(startAt + note.duration + release);
+```
+
+The `time` field from the Lilt score maps directly to the audio timeline. The agent's timestamp decisions become the actual playback timing.
+
+### Velocity mapping
+
+```typescript
+const gain = velocity === "accent" ? 0.9
+           : velocity === "normal" ? 0.6
+           : velocity === "soft"   ? 0.35
+           : 0.5;
+```
+
+Three velocity levels. "Accent" flags map to the highest gain. "Soft" maps to 35% gain -- barely audible, which is correct for drone layers and breath-based inputs.
 
 ---
 
-## 4. Reflect / feedback loop
+## 4. Feedback loop
 
-**What it does:** Gives the user a channel to correct the agent's interpretation.
+**Goal:** Let the user correct the agent's interpretation without re-recording.
 
-**Implementation:** Piano roll + Lilt code editor (React)
+**Implementation:** `src/components/LiltPlayerView.tsx`
 
-The piano roll renders the note grid from the Lilt score. The code editor shows the raw Lilt text. Both are live-editable:
+The Lilt code editor is live. When the user changes any field:
 
 ```
-User edits Lilt code  →  parser re-validates  →  synthesizer re-renders
+Edit "soft" to "accent"  ->  re-parse Lilt tokens  ->  re-schedule audio  ->  music updates
+Move timestamp 1.20s to 0.80s  ->  re-parse  ->  note plays earlier
+Swap "C4" to "E4"  ->  re-parse  ->  pitch changes
 ```
 
-No new recording needed. The user can change a velocity (`soft` to `accent`), shift a timestamp, swap a pitch, or add a drone note. The agent re-renders immediately.
-
-This closes the loop: the agent acts, the user reflects, the agent adapts.
+This is the feedback loop. The agent makes a first-pass interpretation. The user steers it. The agent re-renders without asking Gemma 4 again -- the reasoning has already happened. Only the output needs to change.
 
 ---
 
-## Why the agent framing matters
+## 5. Autonomy in practice
 
-Traditional music apps put the interface between the user and the music. The user must understand keys, chords, beats, notation.
+The agent's decisions across 32 disability profiles:
 
-babbled notes removes the interface. The agent reads whatever the user can give (a breath, a tap, a hum with a tremor in it) and builds the musical structure for them.
+```
+NV-01  Autism — breath (beginner)    ->  pensive, cinematic cello, legato, 4 notes
+PH-02  CP — tremor taps (interm.)    ->  pensive, grand piano, legato, 5 notes
+PH-08  Locked-in — morse (advanced)  ->  pensive, grand piano, legato, 6 notes
+MX-04  Tongue click — single         ->  energetic, marimba, staccato, 3 notes
+MX-06  Tongue click — syncopated     ->  energetic, drum kit, staccato, 5 notes
+```
 
-The loop runs in one direction: sound goes in, music comes out. The user never has to know what a C major chord is.
+The agent correctly identifies:
+- Soft inputs (breath, hum, tremor) as "pensive/gentle" with legato voices
+- Sharp inputs (clicks, taps, whistles) as "energetic" with staccato voices
+- Minimal inputs (1 event) as short phrases (3-4 notes)
+- Complex inputs (4+ events) as longer compositions (6-8 notes)
+
+No rules are hardcoded for these distinctions. Gemma 4 reads the DSP digest and decides.
 
 ---
 
-## Test suite
-
-32 DSP profiles across 7 disability categories and 3 difficulty levels.
+## 6. Server architecture
 
 ```
-node test-runner.mjs
+Client (React)
+    |
+    | POST /api/interpret
+    | { dspDigest, audioBase64, userPrompt }
+    |
+Express (server.ts)
+    |
+    | GoogleGenAI.models.generateContent()
+    | model: "gemma-4-26b-a4b-it"
+    | contents: [{ inlineData: audio }, { text: systemPrompt }]
+    |
+Gemma 4 API
+    |
+    | { mood, articulation, voice, liltCode, notes, explanation }
+    |
+Express (parses JSON, merges drone notes)
+    |
+Client (renders NeuralGem locked state, starts synthesizer)
 ```
 
-Results saved to `test-results.json`. Each entry is a live Gemma 4 response -- no fabricated data.
+The API key never touches the browser. The Express server is the only process that calls the Gemma API.
 
 ---
 
 ## Files
 
 ```
-server.ts          agent backend: Express + Gemma 4 API call
-src/               React frontend: NeuralGem, piano roll, Lilt editor, synthesizer
-test-runner.mjs    32-profile DSP test suite
-test-results.json  live Gemma 4 responses for all 32 profiles
-HERMES.md          this file
+server.ts                    agent backend: Express + Gemma 4 reasoning call
+src/lib/dspAnalyzer.ts       perception layer: FFT, RMS, onset detection
+src/lib/audioEngine.ts       action layer: Web Audio API synthesis
+src/components/NeuralGem.tsx agent state visualizer: idle/recording/locked
+src/components/LiltPlayerView.tsx  feedback loop: piano roll + Lilt editor
+src/App.tsx                  state machine: idle/recording/processing/playing
+test-runner.mjs              32-profile autonomous decision test suite
+test-results.json            live Gemma 4 responses for all 32 profiles
+HERMES.md                    this file
 ```
