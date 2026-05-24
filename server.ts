@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 
 dotenv.config({ path: ".env.local" });
@@ -94,9 +94,17 @@ THE LILT CONTRACT:
 - If the sound is sharp, rhythmic, or tapped: mood = "energetic" or "tight", voice = "marimba" or "drum kit", articulation = "staccato"
 - Keep pitches harmonious (C major, A minor, or pentatonic)
 - Timestamps must align with DSP onsets but feel musically polished
-- Always include a second gentle drone note layer using "synthesizer ambient" voice
+- Always include at least one drone note with voice "synthesizer ambient"
 
-Output ONLY valid JSON matching the schema.`;
+Output ONLY a raw JSON object (no markdown, no code fences) with these exact keys:
+{
+  "mood": string,
+  "articulation": "legato" | "staccato",
+  "voice": string,
+  "liltCode": string (one line per note: "C4 ! soft @ 0.00s"),
+  "notes": [ { "note": string, "duration": number, "velocity": string, "time": number, "voice"?: string } ],
+  "explanation": string
+}`;
 
     const contents: any[] = [];
     if (audioBase64) {
@@ -107,52 +115,20 @@ Output ONLY valid JSON matching the schema.`;
     contents.push({ text: systemPrompt });
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemma-4-26b-a4b-it",
       contents,
       config: {
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.OBJECT,
-          required: ["mood", "articulation", "voice", "liltCode", "notes", "explanation"],
-          properties: {
-            mood: { type: Type.STRING },
-            articulation: { type: Type.STRING },
-            voice: { type: Type.STRING },
-            liltCode: { type: Type.STRING },
-            notes: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.OBJECT,
-                required: ["note", "duration", "velocity", "time"],
-                properties: {
-                  note:     { type: Type.STRING },
-                  duration: { type: Type.NUMBER },
-                  velocity: { type: Type.STRING },
-                  time:     { type: Type.NUMBER },
-                  voice:    { type: Type.STRING },
-                },
-              },
-            },
-            droneNotes: {
-              type: Type.ARRAY,
-              items: {
-                type: Type.OBJECT,
-                required: ["note", "duration", "velocity", "time"],
-                properties: {
-                  note:     { type: Type.STRING },
-                  duration: { type: Type.NUMBER },
-                  velocity: { type: Type.STRING },
-                  time:     { type: Type.NUMBER },
-                },
-              },
-            },
-            explanation: { type: Type.STRING },
-          },
-        },
+        temperature: 0.7,
+        maxOutputTokens: 1024,
       },
     });
 
-    const parsed = JSON.parse(response.text?.trim() || "{}");
+    // Extract JSON from response (strips thinking text + markdown fences)
+    let rawText = response.text?.trim() || "{}";
+    // Try to find the JSON object directly in the text
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) rawText = jsonMatch[0];
+    const parsed = JSON.parse(rawText);
 
     // Merge drone notes into main notes array with voice override
     const droneNotes = (parsed.droneNotes || []).map((n: any) => ({
