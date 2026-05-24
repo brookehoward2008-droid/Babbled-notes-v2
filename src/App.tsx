@@ -142,9 +142,14 @@ export default function App() {
           )}
 
           {appState === "processing" && (
-            <p className="text-xs font-mono text-slate-500 animate-pulse">
-              gemini is listening…
-            </p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-xs font-mono text-slate-500 animate-pulse">
+                gemma is reading your sound…
+              </p>
+              <p className="text-xs font-mono text-slate-700">
+                (may take 30–60 seconds)
+              </p>
+            </div>
           )}
         </div>
 
