@@ -1,5 +1,5 @@
 ---
-title: babbled notes — any sound becomes music. built for people who couldn't before.
+title: babbled notes: any sound becomes music. built for people who couldn't before.
 published: true
 tags: devchallenge, gemmachallenge, gemma
 cover_image: [UPLOAD: babbled-notes-cover.png — see image prompt below]
@@ -13,7 +13,7 @@ cover_image: [UPLOAD: babbled-notes-cover.png — see image prompt below]
 
 **Make any sound. Hum. Tap. Breathe. Whistle.**
 
-Gemini 2.0 Flash finds the music inside it and plays it back as piano, cello, marimba, or drums.
+Gemma 4 finds the music inside it and plays it back as piano, cello, marimba, or drums.
 
 No keyboard. No music theory. No pitch-perfect voice.
 
@@ -40,7 +40,7 @@ The app takes whatever you can give and turns it into a real musical composition
 
 ## 💎 The NeuralGem
 
-At the center of the app is the **NeuralGem** — a canvas visualizer with three states:
+At the center of the app is the **NeuralGem**, a canvas visualizer with three states:
 
 ```
 IDLE       →  a breathing silver ring. waiting.
@@ -76,7 +76,7 @@ The gem is not decoration. It tells you what the app is doing without words.
 2.  MAKE A SOUND     →  Web Audio API captures + analyzes in real time
                         (FFT pitch, RMS amplitude, onset detection)
 3.  TAP AGAIN        →  recording stops
-4.  GEMINI READS     →  receives audio + DSP digest simultaneously
+4.  GEMMA 4 READS    →  receives audio + DSP digest simultaneously
                         returns: mood, voice, articulation, Lilt score
 5.  THE GEM LOCKS    →  mood-colored hexagon appears
 6.  MUSIC PLAYS      →  synthesized instrument renders the Lilt score
@@ -85,16 +85,16 @@ The gem is not decoration. It tells you what the app is doing without words.
 
 ---
 
-## 💎 Why Gemini 2.0 Flash
+## 💎 Why Gemma 4
 
 The app sends two things to the model at once:
 
-- **Raw audio** — the actual recorded sound
-- **DSP digest** — structured analysis: onset times, dominant frequency, pitch name, amplitude, tempo estimate
+- **Raw audio**: the actual recorded sound
+- **DSP digest**: structured analysis of onset times, dominant frequency, pitch name, amplitude, tempo estimate
 
-Gemini 2.0 Flash handles multimodal input reliably and returns fast. That speed matters. A user with ALS or limited stamina is waiting to hear what their sound became. A slow model breaks the experience.
+Gemma 4 (`gemma-4-26b-a4b-it`) reads both together and returns fast enough that a user with ALS or limited stamina hears their composition without waiting. That responsiveness matters. A slow model breaks the experience.
 
-Output is enforced via a full JSON response schema — the model writes a Lilt musical score every time. No freeform text. No guessing.
+The system prompt enforces a strict JSON Lilt score every time. No freeform text. No guessing.
 
 ```json
 {
@@ -105,7 +105,7 @@ Output is enforced via a full JSON response schema — the model writes a Lilt m
     { "note": "A3", "duration": 1.2, "velocity": "soft", "time": 0.0 },
     { "note": "C4", "duration": 0.8, "velocity": "normal", "time": 1.2 }
   ],
-  "explanation": "A slow exhale, barely a sound — but steady. Like resolve."
+  "explanation": "A slow exhale, barely a sound. But steady. Like resolve."
 }
 ```
 
@@ -160,10 +160,10 @@ Run them yourself: `node test-runner.mjs`
 ## ◈ Stack
 
 ```
-Gemini 2.0 Flash       multimodal audio → Lilt JSON
-Web Audio API          mic capture, FFT/RMS DSP, synthesized playback
-React + Vite + TS      frontend
-Express + genai SDK    backend (API key stays server-side)
+Gemma 4 (gemma-4-26b-a4b-it)   multimodal audio + DSP digest to Lilt JSON
+Web Audio API                   mic capture, FFT/RMS DSP, synthesized playback
+React + Vite + TypeScript       frontend
+Express + @google/genai SDK     backend (API key stays server-side)
 ```
 
 ---
@@ -177,7 +177,7 @@ E4 ! accent @ 2.10s
 G4 ! soft   @ 3.40s
 ```
 
-Each line is a note trigger: pitch, velocity, timestamp. The piano roll renders from this. The code is editable live — change a velocity, move a timestamp, swap a note, hit compile. The music changes without re-recording.
+Each line is a note trigger: pitch, velocity, timestamp. The piano roll renders from this. The code is editable live. Change a velocity, move a timestamp, swap a note, hit compile. The music changes without re-recording.
 
 ---
 
