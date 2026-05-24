@@ -2,7 +2,6 @@
 title: babbled notes: any sound becomes music. built for people who couldn't before.
 published: true
 tags: devchallenge, gemmachallenge, gemma
-cover_image: [UPLOAD: babbled-notes-cover.png — see image prompt below]
 ---
 
 > 💎 *One sound. Any sound. The gem listens. The music appears.*
