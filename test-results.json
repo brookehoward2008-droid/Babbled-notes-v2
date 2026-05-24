@@ -1,0 +1,1347 @@
+{
+  "runDate": "2026-05-24T21:59:00.573Z",
+  "endpoint": "http://localhost:3000/api/interpret",
+  "totalTests": 32,
+  "passed": 32,
+  "failed": 0,
+  "results": [
+    {
+      "id": "NV-01",
+      "label": "Autism — slow exhale breath (beginner)",
+      "profile": "non-verbal autism",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 2.1,
+        "dominantFreq": 180,
+        "dominantPitch": "F3",
+        "avgAmplitude": 0.04,
+        "events": [
+          {
+            "time": 0.1,
+            "frequency": 180,
+            "pitchName": "F3",
+            "amplitude": 0.04
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 47429,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The low-frequency, soft F3 hum was interpreted as a soulful foundation. I've composed a pensive cello melody in A minor, layered over a continuous synthesizer ambient drone to fulfill the request for a beautiful and expressive response.",
+        "liltCode": "F3 ! soft @ 0.00s\nF3 ! soft @ 0.10s\nA3 ! medium @ 0.80s\nG3 ! soft @ 1.50s"
+      }
+    },
+    {
+      "id": "NV-02",
+      "label": "Autism — single sustained hum (beginner)",
+      "profile": "non-verbal autism",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 3,
+        "dominantFreq": 220,
+        "dominantPitch": "A3",
+        "avgAmplitude": 0.11,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.11
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 43052,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The seed is a single, soft A3 note. To fulfill the request for a beautiful and expressive response, I have interpreted the low amplitude and steady pitch as a 'pensive' mood. I utilized a cinematic cello to provide emotional weight, layering it over a synthesizer ambient drone in A minor. The melody gently ascends from the original pitch to create a sense of melodic development.",
+        "liltCode": "A2 ~ soft @ 0.00s\nA3 ~ medium @ 0.00s\nC4 ~ medium @ 1.00s\nE4 ~ soft @ 2.00s"
+      }
+    },
+    {
+      "id": "NV-03",
+      "label": "Autism — two-tone hum shift (intermediate)",
+      "profile": "non-verbal autism",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4.2,
+        "dominantFreq": 261,
+        "dominantPitch": "C4",
+        "avgAmplitude": 0.13,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.12
+          },
+          {
+            "time": 2.1,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.14
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 36300,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The input is a slow, soft movement from A3 to C4. To achieve a 'beautiful and expressive' response, I've interpreted this in A minor using a cinematic cello with legato articulation. I added an ambient synthesizer drone on A2 to provide harmonic depth and a final E4 to complete the minor triad, creating a sense of emotional resolution.",
+        "liltCode": "A2 ! soft @ 0.00s\nA3 ! soft @ 0.00s\nC4 ! soft @ 2.10s\nE4 ! soft @ 3.50s"
+      }
+    },
+    {
+      "id": "NV-04",
+      "label": "Autism — melodic hum phrase (advanced)",
+      "profile": "non-verbal autism",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 6,
+        "dominantFreq": 330,
+        "dominantPitch": "E4",
+        "avgAmplitude": 0.15,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.12
+          },
+          {
+            "time": 1.5,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.14
+          },
+          {
+            "time": 3,
+            "frequency": 330,
+            "pitchName": "E4",
+            "amplitude": 0.16
+          },
+          {
+            "time": 4.5,
+            "frequency": 392,
+            "pitchName": "G4",
+            "amplitude": 0.15
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 97200,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 5,
+        "explanation": "The input consists of a slow, rising A minor arpeggio. To meet the user's request for a beautiful and expressive response, I have assigned a pensive mood and a grand piano voice with legato articulation. A synthesizer ambient drone on A3 has been added to provide a lush harmonic foundation, while the piano follows the original melodic contour.",
+        "liltCode": "A3 ! soft @ 0.00s\nC4 ! soft @ 1.50s\nE4 ! soft @ 3.00s\nG4 ! soft @ 4.50s\nA3 ! soft @ 0.00s"
+      }
+    },
+    {
+      "id": "NV-05",
+      "label": "Apraxia — disrupted single vowel (beginner)",
+      "profile": "apraxia of speech",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 1.8,
+        "dominantFreq": 196,
+        "dominantPitch": "G3",
+        "avgAmplitude": 0.08,
+        "events": [
+          {
+            "time": 0.2,
+            "frequency": 196,
+            "pitchName": "G3",
+            "amplitude": 0.08
+          },
+          {
+            "time": 0.9,
+            "frequency": 185,
+            "pitchName": "F#3",
+            "amplitude": 0.06
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 74385,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The low-frequency, soft input was interpreted as a pensive cello melody. I used an ambient synthesizer drone on A2 to provide a harmonic foundation for the G3 and F#3 notes found in the DSP analysis, resolving the phrase to an E3 to create a beautiful, cinematic, and expressive conclusion.",
+        "liltCode": "A2 ! very soft @ 0.00s\nG3 ! medium @ 0.20s\nF#3 ! soft @ 0.90s\nE3 ! very soft @ 1.40s"
+      }
+    },
+    {
+      "id": "NV-06",
+      "label": "Apraxia — broken phonation bursts (intermediate)",
+      "profile": "apraxia of speech",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4.5,
+        "dominantFreq": 246,
+        "dominantPitch": "B3",
+        "avgAmplitude": 0.09,
+        "events": [
+          {
+            "time": 0.3,
+            "frequency": 246,
+            "pitchName": "B3",
+            "amplitude": 0.1
+          },
+          {
+            "time": 1.4,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.07
+          },
+          {
+            "time": 2.8,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.11
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 110252,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The slow, low-amplitude hum is interpreted as a pensive melody. I have used a grand piano for the primary melodic response (B3, A3, C4) with legato articulation to ensure an expressive, beautiful feel, while a synthesizer ambient drone on C3 provides a harmonic foundation.",
+        "liltCode": "C3 ! soft @ 0.00s\nB3 ! soft @ 0.30s\nA3 ! soft @ 1.40s\nC4 ! soft @ 2.80s"
+      }
+    },
+    {
+      "id": "NV-07",
+      "label": "Apraxia — vowel glide attempt (advanced)",
+      "profile": "apraxia of speech",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 5,
+        "dominantFreq": 293,
+        "dominantPitch": "D4",
+        "avgAmplitude": 0.1,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.09
+          },
+          {
+            "time": 1,
+            "frequency": 246,
+            "pitchName": "B3",
+            "amplitude": 0.1
+          },
+          {
+            "time": 2.2,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.11
+          },
+          {
+            "time": 3.5,
+            "frequency": 293,
+            "pitchName": "D4",
+            "amplitude": 0.1
+          },
+          {
+            "time": 4.2,
+            "frequency": 329,
+            "pitchName": "E4",
+            "amplitude": 0.09
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 85149,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 6,
+        "explanation": "The rising melodic sequence suggests a contemplative ascent. To provide a 'beautiful and expressive' response, I've utilized a grand piano with legato articulation and anchored the A minor tonality with a deep, ambient synthesizer drone on A2.",
+        "liltCode": "A2 ! soft @ 0.00s\nA3 ! soft @ 0.00s\nB3 ! soft @ 1.00s\nC4 ! soft @ 2.20s\nD4 ! soft @ 3.50s\nE4 ! soft @ 4.20s"
+      }
+    },
+    {
+      "id": "NV-08",
+      "label": "Selective mutism — barely audible breath (beginner)",
+      "profile": "selective mutism",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 2.5,
+        "dominantFreq": 120,
+        "dominantPitch": "B2",
+        "avgAmplitude": 0.02,
+        "events": [
+          {
+            "time": 0.5,
+            "frequency": 120,
+            "pitchName": "B2",
+            "amplitude": 0.02
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 67577,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The low, soft B2 frequency was interpreted as a pensive melodic seed. I placed it in an A minor context to create a beautiful, expressive tension against an ambient A2 drone, using a cinematic cello with legato articulation to fulfill the user's request for an expressive response.",
+        "liltCode": "A2 ! soft @ 0.00s\nB2 ! soft @ 0.50s\nC3 ! medium @ 1.50s\nE3 ! soft @ 2.00s"
+      }
+    },
+    {
+      "id": "NV-09",
+      "label": "Selective mutism — nose exhale rhythm (intermediate)",
+      "profile": "selective mutism",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 110,
+        "dominantPitch": "A2",
+        "avgAmplitude": 0.03,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 110,
+            "pitchName": "A2",
+            "amplitude": 0.03
+          },
+          {
+            "time": 2,
+            "frequency": 110,
+            "pitchName": "A2",
+            "amplitude": 0.03
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 92395,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 3,
+        "explanation": "The low-frequency A2 hum provides a stable, grounding foundation. To create a beautiful and expressive response, I have composed a legato cinematic cello melody that moves from the tonic to the dominant (E3) at the second onset, layered over a continuous ambient synthesizer drone to add depth and cinematic texture.",
+        "liltCode": "A2 ! soft @ 0.00s\nE3 ! medium @ 2.00s\nA2 ! soft @ 0.00s"
+      }
+    },
+    {
+      "id": "PH-01",
+      "label": "Cerebral palsy — single finger tap (beginner)",
+      "profile": "cerebral palsy",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 1.5,
+        "dominantFreq": 900,
+        "dominantPitch": "A5",
+        "avgAmplitude": 0.22,
+        "events": [
+          {
+            "time": 0.4,
+            "frequency": 900,
+            "pitchName": "A5",
+            "amplitude": 0.22
+          }
+        ],
+        "tempo": 40
+      },
+      "status": "ok",
+      "ms": 52846,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 3,
+        "explanation": "The slow, singular A5 frequency was interpreted as a pensive seed. I've constructed a cinematic response using a grand piano melody that descends from the seed note, grounded by a deep synthesizer ambient drone in A minor.",
+        "liltCode": "A2 ! soft @ 0.00s\nA5 ! medium @ 0.40s\nE5 ! soft @ 1.00s"
+      }
+    },
+    {
+      "id": "PH-02",
+      "label": "Cerebral palsy — tremor tap cluster (intermediate)",
+      "profile": "cerebral palsy",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 3.5,
+        "dominantFreq": 850,
+        "dominantPitch": "G#5",
+        "avgAmplitude": 0.18,
+        "events": [
+          {
+            "time": 0.3,
+            "frequency": 900,
+            "pitchName": "A5",
+            "amplitude": 0.22
+          },
+          {
+            "time": 0.5,
+            "frequency": 820,
+            "pitchName": "G#5",
+            "amplitude": 0.15
+          },
+          {
+            "time": 1.9,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.2
+          },
+          {
+            "time": 2.1,
+            "frequency": 800,
+            "pitchName": "G5",
+            "amplitude": 0.14
+          }
+        ],
+        "tempo": 60
+      },
+      "status": "ok",
+      "ms": 86181,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 5,
+        "explanation": "The original sound's soft, melodic contour was interpreted as a pensive piano melody in A minor. To ensure harmonic cohesion as requested, the G# pitch was nudged to a G natural. A deep E2 ambient drone was added to provide a cinematic foundation, and legato articulation was applied to create a beautiful, expressive response.",
+        "liltCode": "E2 ! low @ 0.00s\nA5 ! medium @ 0.30s\nG5 ! soft @ 0.50s\nA5 ! medium @ 1.90s\nG5 ! soft @ 2.10s"
+      }
+    },
+    {
+      "id": "PH-03",
+      "label": "Cerebral palsy — intentional beat pattern (advanced)",
+      "profile": "cerebral palsy",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 6,
+        "dominantFreq": 880,
+        "dominantPitch": "A5",
+        "avgAmplitude": 0.2,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.25
+          },
+          {
+            "time": 1,
+            "frequency": 440,
+            "pitchName": "A4",
+            "amplitude": 0.15
+          },
+          {
+            "time": 2,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.23
+          },
+          {
+            "time": 3,
+            "frequency": 440,
+            "pitchName": "A4",
+            "amplitude": 0.14
+          },
+          {
+            "time": 4,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.22
+          },
+          {
+            "time": 5,
+            "frequency": 660,
+            "pitchName": "E5",
+            "amplitude": 0.18
+          }
+        ],
+        "tempo": 60
+      },
+      "status": "ok",
+      "ms": 53683,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 7,
+        "explanation": "The input sequence is a slow, melodic oscillation between A5 and A4, concluding with a resolution to E5. To meet the user's request for a beautiful and expressive response, I have interpreted this as a pensive piano melody using legato articulation, grounded by a deep, ambient A3 synthesizer drone to provide harmonic stability and emotional depth.",
+        "liltCode": "A5 ! medium @ 0.00s\nA4 ! soft @ 1.00s\nA5 ! medium @ 2.00s\nA4 ! soft @ 3.00s\nA5 ! medium @ 4.00s\nE5 ! medium @ 5.00s\nA3 ! low @ 0.00s"
+      }
+    },
+    {
+      "id": "PH-04",
+      "label": "ALS — minimal breath control (beginner)",
+      "profile": "ALS / motor neuron disease",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 3,
+        "dominantFreq": 160,
+        "dominantPitch": "E3",
+        "avgAmplitude": 0.03,
+        "events": [
+          {
+            "time": 0.8,
+            "frequency": 160,
+            "pitchName": "E3",
+            "amplitude": 0.03
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 68587,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The low-frequency E3 hum was interpreted as a pensive, grounding element. I used a synthesizer ambient drone to provide a stable foundation and a cinematic cello to perform a legato melodic ascent in A minor, starting precisely at the original onset to maintain a connection to the seed sound.",
+        "liltCode": "E3 ! soft @ 0.00s\nE3 ! gentle @ 0.80s\nG3 ! gentle @ 1.60s\nA3 ! gentle @ 2.40s"
+      }
+    },
+    {
+      "id": "PH-05",
+      "label": "ALS — pulsed breath pattern (intermediate)",
+      "profile": "ALS / motor neuron disease",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 5,
+        "dominantFreq": 155,
+        "dominantPitch": "Eb3",
+        "avgAmplitude": 0.04,
+        "events": [
+          {
+            "time": 0.5,
+            "frequency": 160,
+            "pitchName": "E3",
+            "amplitude": 0.04
+          },
+          {
+            "time": 2.5,
+            "frequency": 155,
+            "pitchName": "Eb3",
+            "amplitude": 0.03
+          },
+          {
+            "time": 4.2,
+            "frequency": 165,
+            "pitchName": "E3",
+            "amplitude": 0.04
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 38827,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The low-frequency, slow-moving seed sound suggests a contemplative mood. I have translated the pitch shifts into a legato cinematic cello melody, using the Eb3 to create a beautiful, pensive tension against an A-based ambient synthesizer drone.",
+        "liltCode": "A2 ! soft @ 0.00s\nE3 ! soft @ 0.50s\nEb3 ! soft @ 2.50s\nE3 ! soft @ 4.20s"
+      }
+    },
+    {
+      "id": "PH-06",
+      "label": "Locked-in — single switch click (beginner)",
+      "profile": "locked-in syndrome",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 2,
+        "dominantFreq": 1000,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.3,
+        "events": [
+          {
+            "time": 0.5,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.3
+          }
+        ],
+        "tempo": 30
+      },
+      "status": "ok",
+      "ms": 55770,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 3,
+        "explanation": "To respond to the high-frequency C6 seed, I created a pensive arrangement that grounds the brightness with a deep synthesizer drone. The piano melody follows the C major tonality, starting at the exact DSP onset of 0.5s and resolving upward to create a sense of beautiful, cinematic movement.",
+        "liltCode": "C3 ! soft @ 0.00s\nC5 ! medium @ 0.50s\nG5 ! soft @ 1.50s"
+      }
+    },
+    {
+      "id": "PH-07",
+      "label": "Locked-in — two-click phrase (intermediate)",
+      "profile": "locked-in syndrome",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 1000,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.28,
+        "events": [
+          {
+            "time": 0.5,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.3
+          },
+          {
+            "time": 2.5,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.26
+          }
+        ],
+        "tempo": 30
+      },
+      "status": "ok",
+      "ms": 45362,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The slow, high-pitched C6 seed was interpreted as a pensive melody. I added a low C3 drone to provide harmonic depth and used a grand piano with legato articulation to create a beautiful, cinematic response that aligns with the original onsets.",
+        "liltCode": "C3 ! soft @ 0.00s\nC6 ! medium @ 0.50s\nE6 ! soft @ 1.50s\nC6 ! medium @ 2.50s"
+      }
+    },
+    {
+      "id": "PH-08",
+      "label": "Locked-in — morse-style rhythm (advanced)",
+      "profile": "locked-in syndrome",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 6,
+        "dominantFreq": 1000,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.28,
+        "events": [
+          {
+            "time": 0.2,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.3
+          },
+          {
+            "time": 0.5,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.28
+          },
+          {
+            "time": 1.5,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.3
+          },
+          {
+            "time": 3,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.27
+          },
+          {
+            "time": 3.3,
+            "frequency": 1000,
+            "pitchName": "C6",
+            "amplitude": 0.29
+          }
+        ],
+        "tempo": 50
+      },
+      "status": "ok",
+      "ms": 78191,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 6,
+        "explanation": "The repetitive C6 seed was interpreted as a melodic rhythmic foundation. To create a beautiful and expressive response, I expanded the single pitch into a sweeping C major arpeggio on grand piano, anchored by a deep ambient synthesizer drone to provide emotional depth.",
+        "liltCode": "C2 ~ ppp @ 0.00s\nC6 ~ mp @ 0.20s\nE6 ~ mp @ 0.50s\nG6 ~ mf @ 1.50s\nC6 ~ mp @ 3.00s\nB5 ~ p @ 3.30s"
+      }
+    },
+    {
+      "id": "PH-09",
+      "label": "Quadriplegia — breath-puff single trigger (beginner)",
+      "profile": "quadriplegia (breath controller)",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 1.5,
+        "dominantFreq": 200,
+        "dominantPitch": "G3",
+        "avgAmplitude": 0.07,
+        "events": [
+          {
+            "time": 0.1,
+            "frequency": 200,
+            "pitchName": "G3",
+            "amplitude": 0.07
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 38819,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The seed sound is a gentle, low-frequency G3. To create a beautiful and expressive response, I have composed a pensive legato cello melody in A minor, anchored by an ambient synthesizer drone on G to provide harmonic depth.",
+        "liltCode": "G2 ! soft @ 0.00s\nG3 ! soft @ 0.10s\nC4 ! soft @ 0.60s\nA3 ! soft @ 1.10s"
+      }
+    },
+    {
+      "id": "PH-10",
+      "label": "Quadriplegia — hard puff / soft puff contrast (intermediate)",
+      "profile": "quadriplegia (breath controller)",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 200,
+        "dominantPitch": "G3",
+        "avgAmplitude": 0.09,
+        "events": [
+          {
+            "time": 0.2,
+            "frequency": 200,
+            "pitchName": "G3",
+            "amplitude": 0.2
+          },
+          {
+            "time": 1.5,
+            "frequency": 180,
+            "pitchName": "F3",
+            "amplitude": 0.05
+          },
+          {
+            "time": 2.8,
+            "frequency": 200,
+            "pitchName": "G3",
+            "amplitude": 0.22
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 64099,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The input's slow, melodic hum was interpreted as a pensive cello melody. I added a deep C2 synthesizer ambient drone to provide a harmonic foundation and used legato articulation to enhance the expressive, beautiful quality requested.",
+        "liltCode": "C2 ! soft @ 0.00s\nG3 ! medium @ 0.20s\nF3 ! soft @ 1.50s\nG3 ! medium @ 2.80s"
+      }
+    },
+    {
+      "id": "PH-11",
+      "label": "Quadriplegia — rhythmic breath phrase (advanced)",
+      "profile": "quadriplegia (breath controller)",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 6,
+        "dominantFreq": 196,
+        "dominantPitch": "G3",
+        "avgAmplitude": 0.12,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 200,
+            "pitchName": "G3",
+            "amplitude": 0.22
+          },
+          {
+            "time": 0.8,
+            "frequency": 180,
+            "pitchName": "F3",
+            "amplitude": 0.05
+          },
+          {
+            "time": 1.8,
+            "frequency": 200,
+            "pitchName": "G3",
+            "amplitude": 0.2
+          },
+          {
+            "time": 2.6,
+            "frequency": 180,
+            "pitchName": "F3",
+            "amplitude": 0.04
+          },
+          {
+            "time": 3.6,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.21
+          },
+          {
+            "time": 4.8,
+            "frequency": 196,
+            "pitchName": "G3",
+            "amplitude": 0.18
+          }
+        ],
+        "tempo": 70
+      },
+      "status": "ok",
+      "ms": 60044,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 7,
+        "explanation": "The input signal is slow and melodic with low amplitude, suggesting a gentle and pensive mood. To create a beautiful, expressive response, I have utilized a grand piano for the primary melody to provide clarity and warmth, supported by a low G2 synthesizer ambient drone for harmonic depth. The melody follows the original pitch contour (G-F-G-F-A-G) within a C major context, using legato articulation to smooth the transitions between the identified onsets.",
+        "liltCode": "G2 ! soft @ 0.00s\nG3 ! medium @ 0.00s\nF3 ! soft @ 0.80s\nG3 ! medium @ 1.80s\nF3 ! soft @ 2.60s\nA3 ! medium @ 3.60s\nG3 ! medium @ 4.80s"
+      }
+    },
+    {
+      "id": "PH-12",
+      "label": "Parkinson's — tremor hum (beginner)",
+      "profile": "Parkinson's disease",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 2.5,
+        "dominantFreq": 210,
+        "dominantPitch": "G#3",
+        "avgAmplitude": 0.1,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 215,
+            "pitchName": "A3",
+            "amplitude": 0.11
+          },
+          {
+            "time": 0.3,
+            "frequency": 205,
+            "pitchName": "G#3",
+            "amplitude": 0.09
+          },
+          {
+            "time": 0.6,
+            "frequency": 215,
+            "pitchName": "A3",
+            "amplitude": 0.1
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 50757,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 5,
+        "explanation": "The low-frequency, slow-moving hum was interpreted as a pensive melody. I used a cinematic cello to capture the expressive intent, following the A3-G#3-A3 sequence from the DSP, and grounded the composition with an A2 ambient synthesizer drone to create a beautiful, harmonious atmosphere in A minor.",
+        "liltCode": "A2 ! soft @ 0.00s\nA3 ! medium @ 0.00s\nG#3 ! soft @ 0.30s\nA3 ! medium @ 0.60s\nE4 ! soft @ 1.20s"
+      }
+    },
+    {
+      "id": "PH-13",
+      "label": "Parkinson's — vocal tremor melody (advanced)",
+      "profile": "Parkinson's disease",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 5,
+        "dominantFreq": 260,
+        "dominantPitch": "C4",
+        "avgAmplitude": 0.11,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 260,
+            "pitchName": "C4",
+            "amplitude": 0.12
+          },
+          {
+            "time": 0.2,
+            "frequency": 255,
+            "pitchName": "B3",
+            "amplitude": 0.1
+          },
+          {
+            "time": 1,
+            "frequency": 290,
+            "pitchName": "D4",
+            "amplitude": 0.12
+          },
+          {
+            "time": 1.2,
+            "frequency": 285,
+            "pitchName": "C#4",
+            "amplitude": 0.09
+          },
+          {
+            "time": 2.4,
+            "frequency": 327,
+            "pitchName": "E4",
+            "amplitude": 0.13
+          },
+          {
+            "time": 3.6,
+            "frequency": 390,
+            "pitchName": "G4",
+            "amplitude": 0.11
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 54465,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 6,
+        "explanation": "The original sound is slow and melodic, so I applied a 'pensive' mood with a 'grand piano' voice and 'legato' articulation to meet the user's request for beauty. I added a 'synthesizer ambient' drone on C3 for depth and smoothed the melody into a C major scale, omitting the dissonant C#4 to ensure harmonic consistency.",
+        "liltCode": "C3 ! soft @ 0.00s\nC4 ! medium @ 0.00s\nB3 ! soft @ 0.20s\nD4 ! medium @ 1.00s\nE4 ! medium @ 2.40s\nG4 ! medium @ 3.60s"
+      }
+    },
+    {
+      "id": "MX-01",
+      "label": "Whistle — single clear pitch (beginner)",
+      "profile": "general / assistive",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 1.8,
+        "dominantFreq": 1046,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.35,
+        "events": [
+          {
+            "time": 0.1,
+            "frequency": 1046,
+            "pitchName": "C6",
+            "amplitude": 0.35
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 54100,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The high-frequency C6 input was interpreted as a gentle, singing tone. I've composed a pensive response using a grand piano in C major, layered over a deep synthesizer ambient drone to provide a lush, expressive foundation that honors the user's request for beauty.",
+        "liltCode": "C3 ! soft @ 0.00s\nC6 ! medium @ 0.10s\nE6 ! soft @ 1.10s\nG5 ! soft @ 1.70s"
+      }
+    },
+    {
+      "id": "MX-02",
+      "label": "Whistle — two-note call (intermediate)",
+      "profile": "general / assistive",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 3,
+        "dominantFreq": 1046,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.33,
+        "events": [
+          {
+            "time": 0.1,
+            "frequency": 1046,
+            "pitchName": "C6",
+            "amplitude": 0.35
+          },
+          {
+            "time": 1.6,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.3
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 60257,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 3,
+        "explanation": "The high-pitched C6 and A5 notes were interpreted as a delicate melodic sequence. To fulfill the request for a beautiful and expressive response, I layered a warm C3 synthesizer drone for depth and used a grand piano with legato articulation to create a pensive, cinematic atmosphere.",
+        "liltCode": "C3 ! soft @ 0.00s\nC6 ! medium @ 0.10s\nA5 ! medium @ 1.60s"
+      }
+    },
+    {
+      "id": "MX-03",
+      "label": "Whistle — pentatonic phrase (advanced)",
+      "profile": "general / assistive",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 5,
+        "dominantFreq": 1046,
+        "dominantPitch": "C6",
+        "avgAmplitude": 0.32,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 1046,
+            "pitchName": "C6",
+            "amplitude": 0.35
+          },
+          {
+            "time": 1,
+            "frequency": 880,
+            "pitchName": "A5",
+            "amplitude": 0.3
+          },
+          {
+            "time": 2,
+            "frequency": 784,
+            "pitchName": "G5",
+            "amplitude": 0.28
+          },
+          {
+            "time": 3,
+            "frequency": 659,
+            "pitchName": "E5",
+            "amplitude": 0.27
+          },
+          {
+            "time": 4,
+            "frequency": 523,
+            "pitchName": "C5",
+            "amplitude": 0.32
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 72537,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 6,
+        "explanation": "The descending melodic sequence suggests a gentle, contemplative mood. I have translated this into a legato grand piano melody and layered it over a sustained C3 synthesizer ambient drone to create a beautiful, cinematic, and pensive atmosphere that fulfills the user's request for expressiveness.",
+        "liltCode": "C3 ! piano @ 0.00s\nC6 ! piano @ 0.00s\nA5 ! piano @ 1.00s\nG5 ! piano @ 2.00s\nE5 ! piano @ 3.00s\nC5 ! piano @ 4.00s"
+      }
+    },
+    {
+      "id": "MX-04",
+      "label": "Tongue click — single percussive event (beginner)",
+      "profile": "general / assistive",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 1,
+        "dominantFreq": 2000,
+        "dominantPitch": "B6",
+        "avgAmplitude": 0.45,
+        "events": [
+          {
+            "time": 0.2,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.45
+          }
+        ],
+        "tempo": 60
+      },
+      "status": "ok",
+      "ms": 69204,
+      "result": {
+        "mood": "gentle",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 3,
+        "explanation": "The high B6 frequency was interpreted as a delicate melodic peak. To achieve a beautiful and expressive response, I paired it with a deep C3 ambient drone and a descending legato phrase on grand piano within a C major harmonic context.",
+        "liltCode": "C3 ! soft @ 0.00s\nB6 ! soft @ 0.20s\nA6 ! soft @ 0.60s"
+      }
+    },
+    {
+      "id": "MX-05",
+      "label": "Tongue click — 4/4 rhythm (intermediate)",
+      "profile": "general / assistive",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 2000,
+        "dominantPitch": "B6",
+        "avgAmplitude": 0.42,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.45
+          },
+          {
+            "time": 1,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.4
+          },
+          {
+            "time": 2,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.43
+          },
+          {
+            "time": 3,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.38
+          }
+        ],
+        "tempo": 60
+      },
+      "status": "ok",
+      "ms": 68423,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 5,
+        "explanation": "To create a beautiful and expressive response, I transformed the steady B6 frequency into a descending melodic phrase in A minor. I used a grand piano for a lyrical feel and added a low A2 ambient synthesizer drone to provide emotional depth and a pensive atmosphere.",
+        "liltCode": "A2 ! soft @ 0.00s\nB6 ! medium @ 0.00s\nA6 ! medium @ 1.00s\nG6 ! medium @ 2.00s\nE6 ! soft @ 3.00s"
+      }
+    },
+    {
+      "id": "MX-06",
+      "label": "Tongue click — syncopated groove (advanced)",
+      "profile": "general / assistive",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 2000,
+        "dominantPitch": "B6",
+        "avgAmplitude": 0.42,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.45
+          },
+          {
+            "time": 0.75,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.38
+          },
+          {
+            "time": 1.5,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.42
+          },
+          {
+            "time": 2.25,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.4
+          },
+          {
+            "time": 3,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.44
+          },
+          {
+            "time": 3.5,
+            "frequency": 2000,
+            "pitchName": "B6",
+            "amplitude": 0.36
+          }
+        ],
+        "tempo": 80
+      },
+      "status": "ok",
+      "ms": 85072,
+      "result": {
+        "mood": "energetic",
+        "voice": "marimba",
+        "articulation": "staccato",
+        "noteCount": 7,
+        "explanation": "I transformed the high-frequency rhythmic pulses into a sparkling, descending C-major pentatonic melody. To satisfy the request for a 'beautiful and expressive' response, I utilized a 'delicate' velocity on the marimba and anchored the composition with a lush 'synthesizer ambient' drone, while maintaining the original staccato rhythm.",
+        "liltCode": "B6 ! delicate @ 0.00s\nG6 ! delicate @ 0.75s\nE6 ! delicate @ 1.50s\nC6 ! delicate @ 2.25s\nB6 ! delicate @ 3.00s\nG6 ! delicate @ 3.50s\nC3 ! soft @ 0.00s"
+      }
+    },
+    {
+      "id": "MX-07",
+      "label": "AAC user — rising hum intention (intermediate)",
+      "profile": "AAC / pre-verbal",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 330,
+        "dominantPitch": "E4",
+        "avgAmplitude": 0.14,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 220,
+            "pitchName": "A3",
+            "amplitude": 0.13
+          },
+          {
+            "time": 1.3,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.14
+          },
+          {
+            "time": 2.6,
+            "frequency": 330,
+            "pitchName": "E4",
+            "amplitude": 0.15
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 57915,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The input sequence follows an A minor triad progression (A3, C4, E4). To create a beautiful and expressive response, I have applied a pensive mood with a grand piano using legato articulation. I added a low A2 synthesizer ambient drone to provide a cinematic foundation that anchors the harmonic movement.",
+        "liltCode": "A2 ! soft @ 0.00s\nA3 ! soft @ 0.00s\nC4 ! soft @ 1.30s\nE4 ! soft @ 2.60s"
+      }
+    },
+    {
+      "id": "MX-08",
+      "label": "AAC user — call and response hum (advanced)",
+      "profile": "AAC / pre-verbal",
+      "difficulty": "advanced",
+      "digest": {
+        "duration": 6,
+        "dominantFreq": 392,
+        "dominantPitch": "G4",
+        "avgAmplitude": 0.14,
+        "events": [
+          {
+            "time": 0,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.14
+          },
+          {
+            "time": 1,
+            "frequency": 330,
+            "pitchName": "E4",
+            "amplitude": 0.15
+          },
+          {
+            "time": 2,
+            "frequency": 392,
+            "pitchName": "G4",
+            "amplitude": 0.16
+          },
+          {
+            "time": 3.5,
+            "frequency": 330,
+            "pitchName": "E4",
+            "amplitude": 0.14
+          },
+          {
+            "time": 4.5,
+            "frequency": 261,
+            "pitchName": "C4",
+            "amplitude": 0.13
+          }
+        ]
+      },
+      "status": "ok",
+      "ms": 57871,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 6,
+        "explanation": "The soft, melodic C major sequence was translated into a pensive grand piano arrangement. I added a low C drone using a synthesizer ambient voice to provide the harmonic foundation and emotional depth requested by the user's intent.",
+        "liltCode": "C3 ! ambient @ 0.00s\nC4 ! soft @ 0.00s\nE4 ! soft @ 1.00s\nG4 ! soft @ 2.00s\nE4 ! soft @ 3.50s\nC4 ! soft @ 4.50s"
+      }
+    },
+    {
+      "id": "MX-09",
+      "label": "SCI C4 — head tap on mic (beginner)",
+      "profile": "spinal cord injury C4",
+      "difficulty": "beginner",
+      "digest": {
+        "duration": 2,
+        "dominantFreq": 400,
+        "dominantPitch": "G4",
+        "avgAmplitude": 0.25,
+        "events": [
+          {
+            "time": 0.6,
+            "frequency": 400,
+            "pitchName": "G4",
+            "amplitude": 0.25
+          }
+        ],
+        "tempo": 30
+      },
+      "status": "ok",
+      "ms": 70474,
+      "result": {
+        "mood": "pensive",
+        "voice": "cinematic cello",
+        "articulation": "legato",
+        "noteCount": 5,
+        "explanation": "The slow, soft G4 seed was interpreted as a pensive, emotional moment. I've added a deep G2 synthesizer drone to provide grounding and a cinematic cello melody in C major that resolves around the original seed note at 0.6s.",
+        "liltCode": "G2 ~ soft @ 0.00s\nC4 ~ soft @ 0.00s\nG4 ~ soft @ 0.60s\nA4 ~ medium @ 1.40s\nG4 ~ soft @ 2.00s"
+      }
+    },
+    {
+      "id": "MX-10",
+      "label": "SCI C4 — two head taps, intentional gap (intermediate)",
+      "profile": "spinal cord injury C4",
+      "difficulty": "intermediate",
+      "digest": {
+        "duration": 4,
+        "dominantFreq": 400,
+        "dominantPitch": "G4",
+        "avgAmplitude": 0.23,
+        "events": [
+          {
+            "time": 0.5,
+            "frequency": 400,
+            "pitchName": "G4",
+            "amplitude": 0.25
+          },
+          {
+            "time": 2.5,
+            "frequency": 400,
+            "pitchName": "G4",
+            "amplitude": 0.22
+          }
+        ],
+        "tempo": 30
+      },
+      "status": "ok",
+      "ms": 52555,
+      "result": {
+        "mood": "pensive",
+        "voice": "grand piano",
+        "articulation": "legato",
+        "noteCount": 4,
+        "explanation": "The slow tempo and low amplitude of the seed sound suggest a gentle, pensive atmosphere. I have translated the G4 frequency into a legato grand piano melody, supported by a deep synthesizer ambient drone in G to provide harmonic weight and an expressive, cinematic feel.",
+        "liltCode": "G2 ! soft @ 0.00s\nG4 ! medium @ 0.50s\nC5 ! soft @ 1.50s\nG4 ! medium @ 2.50s"
+      }
+    }
+  ]
+}
