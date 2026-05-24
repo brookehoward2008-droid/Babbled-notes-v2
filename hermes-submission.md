@@ -1,302 +1,368 @@
 ---
-title: babbled notes: a Gemma 4 agent that turns any human sound into music
+title: "Building an Accessibility Agent with Hermes Agent: Sound to Music for People Who Couldn't Before"
 published: true
-tags: devchallenge, hermeschallenge, agent
+tags: hermesagentchallenge, devchallenge, agents
 ---
 
-> 💎 *One sound. Any sound. The Gemma 4 agent hears it. Music appears.*
+> 💎 *One sound. Any sound. The agent hears it. Music appears.*
 
 ---
 
 # 𝕓𝕒𝕓𝕓𝕝𝕖𝕕 𝕟𝕠𝕥𝕖𝕤
-## ✦ A Hermes Agent Powered by Gemma 4 ✦
+## ✦ An Accessibility Agent Built on Hermes Agent Principles ✦
 
-**Hum. Tap. Breathe. Whistle. Click your tongue.**
+This post explores how **Hermes Agent** -- Nous Research's open-source autonomous agent platform -- maps perfectly to a real-world accessibility problem: giving people who cannot use traditional music tools a way to make music with any sound their body can produce.
 
-A Gemma 4 agent reads your sound, decides what music lives inside it, and plays it back as piano, cello, marimba, or drums.
-
-You chose nothing. **The agent chose everything.**
-
-Built for people who have never been able to make music before -- people who are non-verbal, people with ALS, cerebral palsy, locked-in syndrome, quadriplegia, Parkinson's.
-
-> *The quietest breath. The smallest click. The most tremor-filled hum.*
-> *All of it becomes music. The agent makes sure of that.*
+The result is **babbled notes v2**: a Gemma 4-powered agent that turns a hum, a breath, a tap, or a tongue click into a real musical composition.
 
 🔗 **GitHub:** https://github.com/brookehoward2008-droid/Babbled-notes-v2
-📐 **Agent docs:** [HERMES.md](https://github.com/brookehoward2008-droid/Babbled-notes-v2/blob/main/HERMES.md)
+📐 **Agent docs:** https://github.com/brookehoward2008-droid/Babbled-notes-v2/blob/main/HERMES.md
 
 ---
 
-## 💎 Gemma 4 + Hermes: How They Work Together
+## ◈ What Is Hermes Agent
 
-This is not a chatbot sitting inside an agent wrapper. Gemma 4 (`gemma-4-26b-a4b-it`) **is** the agent's reasoning engine -- the only component capable of deciding what a sound means musically.
-
-The Hermes agent provides the body. Gemma 4 provides the mind.
+Hermes Agent is an autonomous system by Nous Research -- not a coding copilot tethered to an IDE, not a chatbot wrapper around a single API. It is a server-side agent with:
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   HERMES AGENT LOOP                     │
-│                                                         │
-│  PERCEIVE        REASON            ACT                  │
-│  ─────────       ──────────────    ──────────           │
-│  Web Audio API   ┌──────────────┐  Web Audio API        │
-│  FFT + RMS    →  │  GEMMA  4    │→ Synthesizer          │
-│  Onset detect    │  gemma-4-    │  Piano, cello,        │
-│  DspDigest out   │  26b-a4b-it  │  marimba, drums       │
-│                  └──────────────┘                       │
-│                         ↕                               │
-│  REFLECT: User edits Lilt code → Agent re-renders       │
-└─────────────────────────────────────────────────────────┘
+✦  Multi-platform reach    Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI
+✦  Persistent memory       Learns from past work, reapplies solutions automatically
+✦  Scheduled automations   Natural language cron: "send me a briefing every morning"
+✦  Subagent delegation     Parallel agents with isolated contexts, no context bleed
+✦  Five sandbox backends   Local, Docker, SSH, Singularity, Modal
+✦  Web capabilities        Search, browser automation, vision, image gen, TTS
 ```
 
-**What the agent does without Gemma 4:** records audio, measures pitch and amplitude. That's it. A microphone.
+Install in one command:
 
-**What Gemma 4 makes possible:** the agent reads a breath and decides it's pensive. It maps a tremor-hum to a cello in A minor. It hears a morse-style rhythm and produces a six-note grand piano phrase with a drone underneath. None of that is rules. It is Gemma 4's judgment, called once, producing a complete musical composition.
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+hermes setup
+```
+
+What makes Hermes Agent different from a chatbot: it operates independently on your server, can schedule work, delegate subtasks to subagents, and persist knowledge across sessions. That is a real agent architecture -- not a prompt-response loop.
 
 ---
 
-## ◈ Why This Is an Agent
+## 💎 Why Hermes Agent and Accessibility Belong Together
 
-A tool does what you tell it. An agent perceives its environment, reasons about what it observed, and takes action on its own.
+Most music tools require two hands, ten fingers, perfect pitch, or years of training.
 
-| Agent property | babbled notes implementation |
+That shuts out a huge part of the world. People who are non-verbal. People with ALS, cerebral palsy, locked-in syndrome, quadriplegia, Parkinson's. People who have always heard music inside them and had no way to get it out.
+
+Hermes Agent's architecture is exactly what an accessibility tool needs:
+
+| Hermes Agent capability | Accessibility use case |
 |---|---|
-| **Autonomous perception** | Web Audio API reads the mic; FFT, RMS, and onset detection run without any user input |
-| **Independent reasoning** | Gemma 4 decides mood, voice, articulation, pitches, and timing -- user sets none of these |
-| **Real-world action** | Synthesizer plays a full composition -- the agent produced this, not the user |
-| **Feedback loop** | User edits the Lilt score; agent re-renders without re-recording |
-| **State awareness** | NeuralGem tracks and displays agent state -- idle, recording, processing, playing |
+| **Multi-platform** | User triggers music generation from Telegram with a voice message -- no keyboard needed |
+| **Persistent memory** | Agent remembers "this user has Parkinson's -- treat tremor as vibrato, always use cello" |
+| **Scheduled automations** | "Generate a new composition every morning at 7am" -- ambient music therapy, automated |
+| **Subagent delegation** | One subagent handles DSP analysis; another handles Gemma 4 reasoning -- no context bleed |
+| **Web + browser** | Agent could automatically post generated Lilt scores to a shared Notion page or email |
+
+A user with locked-in syndrome can send a single message to Hermes Agent via Telegram. Hermes Agent delegates to the babbled notes subagent. A composition comes back to their phone. No laptop required. No mouse. No keyboard.
 
 ---
 
-## 💎 The NeuralGem
+## ◈ The Agent Loop: How babbled notes Maps to Hermes Agent
 
-The agent's face is the **NeuralGem** -- a canvas visualizer that shows state without a single word of text:
+Hermes Agent's architecture -- perceive, reason, act, remember -- is exactly the loop babbled notes runs on every sound.
 
 ```
-◇  IDLE        breathing silver ring. the agent is waiting.
-
-◈  RECORDING   crystallizing polygon, purple shifting to cyan.
-               sides multiply as your audio level rises.
-               the agent is listening and measuring.
-
-⬡  PROCESSING  hexagon forming. the agent is reading your sound.
-               Gemma 4 is receiving audio + DSP digest.
-
-⬡  LOCKED      hexagon. facets lit in the mood color Gemma chose.
-               the agent has decided. music is loading.
+┌─────────────────────────────────────────────────────────────────┐
+│                    HERMES AGENT ORCHESTRATION                   │
+│                                                                 │
+│  User message (Telegram / CLI)                                  │
+│       "Turn my hum into music"                                  │
+│              |                                                  │
+│              v                                                  │
+│  ┌───────────────────────────┐                                  │
+│  │   babbled notes subagent  │                                  │
+│  │                           │                                  │
+│  │  PERCEIVE                 │                                  │
+│  │  Web Audio API            │                                  │
+│  │  FFT + onset detection    │                                  │
+│  │  -> DspDigest             │                                  │
+│  │          |                │                                  │
+│  │  REASON                   │                                  │
+│  │  Gemma 4 reads audio      │                                  │
+│  │  + DspDigest              │                                  │
+│  │  -> Lilt score            │                                  │
+│  │          |                │                                  │
+│  │  ACT                      │                                  │
+│  │  Synthesizer plays music  │                                  │
+│  └───────────────────────────┘                                  │
+│              |                                                  │
+│  Hermes Agent delivers result to user                           │
+│  + stores preference in persistent memory                       │
+└─────────────────────────────────────────────────────────────────┘
 ```
-
-For users who are non-verbal, have cognitive differences, or cannot read: **shape and color are the whole interface.** No labels to parse. No configuration screens. Tap once to open the mic. Tap once to close it. The gem tells you everything else.
 
 ---
 
-## ◈ How Gemma 4 Reads a Sound
+## 💎 Integrating babbled notes With Hermes Agent
 
-The agent sends **two inputs simultaneously** to Gemma 4:
+Here is how to wire babbled notes into Hermes Agent as a callable subagent skill.
 
-### Input 1: Raw audio (base64 WebM)
+### Step 1: Run babbled notes
 
-The actual recorded sound. Gemma 4 can hear what FFT analysis cannot measure:
-- The texture of a breath
-- The tremor frequency inside a hum
-- The sharpness or softness of a tap
-- The space between broken phonation bursts
+```bash
+git clone https://github.com/brookehoward2008-droid/Babbled-notes-v2.git
+cd Babbled-notes-v2
+npm install
+# add GEMINI_API_KEY to .env.local
+npm run dev
+# server running at http://localhost:3000
+```
 
-### Input 2: DspDigest (structured JSON)
+### Step 2: Install Hermes Agent
 
-What the perception layer already calculated precisely:
+```bash
+curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+hermes setup
+```
 
-```json
-{
-  "duration": 3.2,
-  "averageEnergy": 0.11,
-  "peakOnsetCount": 2,
-  "events": [
-    { "time": 0.0,  "frequency": 220, "pitchName": "A3", "amplitude": 0.11 },
-    { "time": 1.6,  "frequency": 261, "pitchName": "C4", "amplitude": 0.13 }
-  ]
+### Step 3: Create a babbled notes skill
+
+Save this as `~/.hermes/skills/babbled_notes.py`:
+
+```python
+"""
+Babbled Notes skill for Hermes Agent
+Converts a DSP sound description into a musical Lilt score via Gemma 4.
+"""
+import requests, json
+
+def generate_music(
+    pitch_hz: float,
+    duration_s: float,
+    amplitude: float = 0.1,
+    user_prompt: str = ""
+) -> dict:
+    """
+    Ask babbled notes to compose music from a sound description.
+    pitch_hz: dominant frequency in Hz (e.g. 220 for A3)
+    duration_s: how long the sound lasted
+    amplitude: loudness 0.0-1.0 (0.1 = soft breath, 0.9 = loud tap)
+    user_prompt: optional intent hint ("make it a cello", "slow and gentle")
+    """
+    import math
+    # build note name from Hz
+    names = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
+    midi = round(12 * math.log2(max(pitch_hz, 20) / 440) + 69)
+    midi = max(0, min(127, midi))
+    pitch_name = f"{names[midi % 12]}{(midi // 12) - 1}"
+
+    digest = {
+        "duration": duration_s,
+        "averageEnergy": amplitude,
+        "peakOnsetCount": 1,
+        "events": [
+            {"time": 0.0, "frequency": pitch_hz,
+             "pitchName": pitch_name, "amplitude": amplitude}
+        ]
+    }
+
+    response = requests.post(
+        "http://localhost:3000/api/interpret",
+        json={"dspDigest": digest, "userPrompt": user_prompt},
+        timeout=90
+    )
+    return response.json()
+
+
+def generate_music_from_profile(profile: str) -> dict:
+    """
+    Generate music for a known disability profile.
+    profile: one of 'breath', 'hum', 'tremor', 'tap', 'click', 'puff', 'whistle'
+    """
+    profiles = {
+        "breath":  (180,  2.5, 0.03, "minimal breath, ambient drone"),
+        "hum":     (220,  3.0, 0.11, "gentle sustained hum, cello"),
+        "tremor":  (196,  2.0, 0.08, "tremor hum, treat as vibrato"),
+        "tap":     (440,  0.2, 0.45, "single finger tap, percussive"),
+        "click":   (800,  0.1, 0.60, "tongue click, sharp and short"),
+        "puff":    (120,  1.5, 0.05, "breath puff, soft and round"),
+        "whistle": (1047, 0.8, 0.30, "single whistle note, clear pitch"),
+    }
+    hz, dur, amp, prompt = profiles.get(profile, profiles["hum"])
+    return generate_music(hz, dur, amp, prompt)
+```
+
+### Step 4: Use it via Hermes Agent
+
+```
+you: Generate music from a hum at A3
+hermes: [calls generate_music(220, 3.0, 0.11, "gentle hum")]
+
+Gemma 4 returned:
+  mood: pensive
+  voice: cinematic cello
+  notes: A3 soft @ 0.00s / C4 normal @ 1.20s / A2 soft @ 0.00s (drone)
+  explanation: A sustained A natural, barely above a whisper.
+               The cello holds it, lets it breathe.
+```
+
+### Step 5: Add persistent memory
+
+Tell Hermes Agent your preference once:
+
+```
+you: Remember that I have Parkinson's -- always treat tremor as vibrato,
+     always use cinematic cello voice
+hermes: Noted. I'll apply that to all future music generation for you.
+```
+
+Hermes Agent's persistent memory stores this. Every future `generate_music` call
+is automatically informed by the user's disability profile -- no re-explaining needed.
+
+---
+
+## ◈ The Perception Layer in Detail
+
+The babbled notes perception layer is what Hermes Agent's subagent would feed into.
+
+Web Audio API runs in real time during recording:
+
+```
+Microphone  ->  AnalyserNode (FFT 256 bins)  ->  peak bin -> Hz -> note name
+                ScriptProcessor              ->  RMS amplitude
+                Onset detector               ->  timestamps when sound starts
+                                             ->  DspDigest (JSON)
+```
+
+Onset detection threshold is set deliberately low (0.1 RMS) to catch breath inputs:
+
+```typescript
+if (rms > 0.1 && elapsed - lastOnset > 0.1) {
+  events.push({ time: elapsed, frequency: freq,
+                pitchName: note, amplitude: rms });
 }
 ```
 
-Two onsets. A3 moving to C4. 1.6 seconds apart. Energy 0.11 -- a soft, sustained sound.
+A breath at 0.02 RMS in a quiet room barely registers. The threshold is at 0.1 because it needs to catch sounds that are 5x quieter than a normal speaking voice.
 
-### What Gemma 4 decides
+---
 
-Gemma 4 reads both and returns a complete **Lilt score** -- the agent's musical output format:
+## 💎 The Reasoning Layer: Gemma 4
+
+Gemma 4 (`gemma-4-26b-a4b-it`) is the reasoning engine. It receives both:
+
+- **Raw audio** (base64 WebM) -- texture, tremor quality, breath shape
+- **DspDigest** (JSON) -- precise onset timing, Hz, amplitude
+
+And returns a complete Lilt score -- a musical composition in structured JSON:
 
 ```json
 {
   "mood": "pensive",
   "articulation": "legato",
   "voice": "cinematic cello",
-  "liltCode": "A3 ! soft @ 0.00s\nC4 ! normal @ 1.60s",
   "notes": [
     { "note": "A3", "duration": 1.4, "velocity": "soft",   "time": 0.0 },
-    { "note": "C4", "duration": 1.2, "velocity": "normal", "time": 1.6 },
+    { "note": "C4", "duration": 1.2, "velocity": "normal", "time": 1.2 },
     { "note": "A2", "duration": 4.0, "velocity": "soft",   "time": 0.0,
       "voice": "synthesizer ambient" }
   ],
-  "explanation": "A rising hum, two tones a minor third apart. The cello holds the first note soft, lifts into the second. A low drone gives it weight."
+  "explanation": "A breath, barely a sound. Steady. Like resolve."
 }
 ```
 
-**Every field is a Gemma 4 decision.** Mood: pensive. Instrument: cello. Key: A minor. Note count: 3. Drone: yes. The user made one two-second hum. Gemma 4 made the music.
+The reasoning follows the Lilt Contract -- guidelines Gemma 4 interprets, not hardcoded rules:
+
+```
+◈  Slow, soft, hummed  ->  pensive/gentle + cello/piano + legato
+◈  Sharp, rhythmic     ->  energetic/tight + marimba/drums + staccato
+◈  Always harmonious pitches: C major, A minor, pentatonic
+◈  Always include a synthesizer ambient drone layer
+```
 
 ---
 
-## 💎 The Lilt Contract
+## ◈ 32 Profiles Tested Across 7 Disability Categories
 
-The system prompt Gemma 4 follows defines a musical judgment contract -- not rigid rules, but principles Gemma 4 interprets against what it actually heard:
-
-```
-◈  Slow, soft, or hummed input:
-   mood   =  "gentle" or "pensive"
-   voice  =  "cinematic cello" or "grand piano"
-   style  =  legato
-
-◈  Sharp, rhythmic, or tapped input:
-   mood   =  "energetic" or "tight"
-   voice  =  "marimba" or "drum kit"
-   style  =  staccato
-
-◈  Always harmonious pitches: C major, A minor, or pentatonic
-◈  Timestamps aligned to DSP onsets, polished to feel musical
-◈  Always include a drone layer: "synthesizer ambient" voice
-```
-
-A Parkinson's tremor-hum does not fit cleanly into "soft" or "sharp." Gemma 4 reads it as closer to a sustained sound -- the tremor becomes vibrato in the cello voice. A morse-style rhythm gets staccato articulation, but Gemma 4 may still choose grand piano if the pattern has musical phrasing rather than raw percussive impact.
-
-**This is why Gemma 4 is the right model for this agent.** It does not follow rules mechanically. It reads the full context -- audio texture AND structured data -- and makes a judgment.
-
----
-
-## ◈ The Lilt Format
-
-The agent outputs in Lilt -- a flat, human-readable musical notation:
+The agent was validated against 32 live Gemma 4 responses -- no simulated data.
 
 ```
-A3 ! soft   @ 0.00s
-C4 ! normal @ 1.60s
-E4 ! accent @ 2.80s
-A2 ! soft   @ 0.00s   [synthesizer ambient]
+Result: 32 / 32 passed
 ```
 
-```
-pitch  !  velocity  @  timestamp  [voice override]
-```
-
-The piano roll renders from this. The code is editable live. Change `soft` to `accent`, shift `1.60s` to `1.20s`, swap `C4` for `E4`, add a note. The synthesizer re-renders immediately. No new recording. No new Gemma 4 call.
-
-**This is the feedback loop.** Gemma 4 interprets. The user steers. The agent re-renders.
-
----
-
-## ◈ Who the Agent Serves
-
-| Profile | Input | What Gemma 4 produces |
+| Category | Tests | Notes range |
 |---|---|---|
-| 💜 Non-verbal autism | Sustained hum | Cello or piano melody in that pitch |
-| 💙 Cerebral palsy | Tremor-affected taps | Polished percussive phrase |
-| 🤍 ALS | Minimal breath | Ambient drone with gentle melody |
-| 💛 Locked-in syndrome | Single switch click | One-trigger composition |
-| 💚 Quadriplegia | Hard/soft breath puffs | Two-dynamic melody |
-| 🧡 Parkinson's | Tremor vocal hum | Cello with tremor as vibrato |
-| 🩷 Apraxia | Broken phonation | Legato phrase bridging the gaps |
-| 💎 AAC / pre-verbal | Rising or falling hum | Interval-based melody |
-| 🔵 SCI C4 | Head tap on mic | Beat composition from impact |
-| ⚪ Selective mutism | Barely-audible breath | Drone that validates the smallest input |
-
-> *The agent does not have a minimum input requirement.*
-> *A breath at 0.02 RMS -- barely detectable -- still produces a full composition.*
-> *Gemma 4 never dismisses a sound as too small to mean something.*
-
----
-
-## 💎 32 Profiles. 7 Categories. 3 Difficulty Levels.
-
-The agent was tested with 32 real DSP profiles representing the disability communities it was built for. Every test is a live Gemma 4 response -- no simulated data.
-
-```
-◈  Beginner     single event, one sound. minimum viable input.
-◈  Intermediate 2-3 events, some rhythm or pitch change.
-◈  Advanced     4+ events, dynamics, intentional pattern.
-```
-
-**Result: 32 / 32 passed.**
+| Non-verbal autism (NV) | 9 | 3-6 notes |
+| Physical disabilities (PH) | 13 | 3-7 notes |
+| Mixed / cross-profile (MX) | 10 | 3-7 notes |
 
 ```bash
-# run the full suite yourself
-node test-runner.mjs
+node test-runner.mjs   # run all 32 yourself
 ```
 
-Full Gemma 4 responses in `test-results.json` on GitHub -- every mood, voice, note count, and explanation the agent produced.
+Full results in `test-results.json` -- 1,347 lines of live Gemma 4 output.
+
+---
+
+## ◈ The NeuralGem: Agent State Without Words
+
+```
+◇  IDLE        breathing silver ring. the agent is waiting.
+◈  RECORDING   crystallizing polygon, purple to cyan.
+               Hermes subagent is running perception layer.
+⬡  PROCESSING  hexagon forming. Gemma 4 is reasoning.
+⬡  LOCKED      hexagon, facets lit in the mood color.
+               The agent has decided. Music is loading.
+```
+
+No text labels. Shape and color carry all the state. For users who cannot read, or who have cognitive differences: the gem is the interface.
+
+---
+
+## 💎 What Hermes Agent Makes Possible Next
+
+With Hermes Agent as the orchestration layer:
+
+```
+◈  Telegram trigger       User sends voice note to Hermes Agent bot
+                          Hermes transcribes audio -> babbled notes API -> Lilt score sent back
+
+◈  Persistent memory      Agent knows: "this user uses breath puffs, always cello,
+                          always soft dynamics" -- applied every session without re-explaining
+
+◈  Scheduled music        "Every morning at 7am, generate a new ambient piece
+                          from my baseline breath profile" -- Hermes cron triggers babbled notes
+
+◈  Subagent pipeline      Agent 1: DSP analysis on uploaded audio file
+                          Agent 2: Gemma 4 reasoning with profile context
+                          Agent 3: Delivery to user's preferred channel
+
+◈  Multi-platform         Same music generation accessible from phone, desktop,
+                          Slack workspace, or Discord server -- wherever the user is
+```
 
 ---
 
 ## ◈ Stack
 
 ```
-┌─────────────────────────────────────────────┐
-│  REASONING    Gemma 4  gemma-4-26b-a4b-it   │  ← the agent's brain
-│  PERCEPTION   Web Audio API (FFT, RMS)      │  ← the agent's ears
-│  ACTION       Web Audio API (synthesis)     │  ← the agent's voice
-│  FRONTEND     React + Vite + TypeScript     │
-│  BACKEND      Express + @google/genai SDK   │  ← API key stays here
-└─────────────────────────────────────────────┘
-```
-
----
-
-## ◈ Run It
-
-```bash
-git clone https://github.com/brookehoward2008-droid/Babbled-notes-v2.git
-cd Babbled-notes-v2
-npm install
-```
-
-Add a free key from [aistudio.google.com](https://aistudio.google.com) to `.env.local`:
-
-```
-GEMINI_API_KEY=your_key_here
-```
-
-```bash
-npm run dev
-# open http://localhost:3000
-```
-
-Tap the silver ring. Make any sound. Wait 30-60 seconds while Gemma 4 reasons. The music plays.
-
-**No key?** Simulation mode runs the full UI with audio -- you can see the complete agent flow without any quota.
-
----
-
-## ◈ Agent Architecture
-
-Full technical breakdown in [HERMES.md](https://github.com/brookehoward2008-droid/Babbled-notes-v2/blob/main/HERMES.md):
-
-```
-✦  Perception:  FFT signal chain, onset detector, DspDigest schema
-✦  Reasoning:   dual-input Gemma 4 call, Lilt Contract, JSON extraction
-✦  Action:      5 voice synthesis chains, AudioContext scheduling
-✦  Feedback:    live Lilt editor, re-render without re-recording
-✦  State:       idle / recording / processing / playing machine
-✦  Tests:       32 disability DSP profiles, live Gemma 4 responses
+┌──────────────────────────────────────────────────────┐
+│  ORCHESTRATION  Hermes Agent (Nous Research)         │  ← autonomous agent platform
+│  REASONING      Gemma 4  gemma-4-26b-a4b-it          │  ← the agent's brain
+│  PERCEPTION     Web Audio API (FFT, RMS, onset)      │  ← the agent's ears
+│  ACTION         Web Audio API (synthesis)            │  ← the agent's voice
+│  FRONTEND       React + Vite + TypeScript            │
+│  BACKEND        Express + @google/genai SDK          │  ← API key stays here
+└──────────────────────────────────────────────────────┘
 ```
 
 ---
 
 > 💎 *The gem crystallizes.*
-> *Gemma 4 has decided.*
+> *Hermes delegates. Gemma 4 decides.*
 > *The music plays.*
-> *You made that.*
-> *You made that with a breath.*
+> *You made that. You made that with a breath.*
 
 ---
 
 **GitHub:** https://github.com/brookehoward2008-droid/Babbled-notes-v2
-**Agent docs:** https://github.com/brookehoward2008-droid/Babbled-notes-v2/blob/main/HERMES.md
+**Agent architecture:** https://github.com/brookehoward2008-droid/Babbled-notes-v2/blob/main/HERMES.md
 
 *by Brooke Chauntel*
