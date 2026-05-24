@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# env — NEVER commit the real key
+.env.local
+.env
+
+# build output
+dist/
+
+# vite temp files
+*.timestamp-*.mjs
+
+# OS
+.DS_Store
+Thumbs.db

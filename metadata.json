@@ -1,0 +1,8 @@
+{
+  "name": "babbled notes",
+  "description": "Make any sound. Hum, tap, whistle, breathe. babbled notes listens, finds the music in it, and plays it back as something real. Powered by Gemini 2.0 Flash.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
