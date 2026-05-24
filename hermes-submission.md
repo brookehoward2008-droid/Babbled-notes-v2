@@ -117,76 +117,39 @@ npm run dev
 
 ### Step 2: Install Hermes Agent
 
+Linux / macOS / WSL2:
 ```bash
 curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 hermes setup
 ```
 
-### Step 3: Create a babbled notes skill
+Windows (PowerShell):
+```powershell
+iex (irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1)
+hermes setup
+```
 
-Save this as `~/.hermes/skills/babbled_notes.py`:
+### Step 3: Install the babbled notes skill
+
+The skill file ships with the repo at `hermes-skills/babbled_notes.py`.
+Copy it once into your Hermes skills directory:
+
+```bash
+# Linux / macOS / WSL2
+cp hermes-skills/babbled_notes.py ~/.hermes/skills/babbled_notes.py
+```
+
+```powershell
+# Windows
+Copy-Item hermes-skills\babbled_notes.py "$env:USERPROFILE\.hermes\skills\babbled_notes.py"
+```
+
+The skill exposes three functions Hermes Agent can call directly:
 
 ```python
-"""
-Babbled Notes skill for Hermes Agent
-Converts a DSP sound description into a musical Lilt score via Gemma 4.
-"""
-import requests, json
-
-def generate_music(
-    pitch_hz: float,
-    duration_s: float,
-    amplitude: float = 0.1,
-    user_prompt: str = ""
-) -> dict:
-    """
-    Ask babbled notes to compose music from a sound description.
-    pitch_hz: dominant frequency in Hz (e.g. 220 for A3)
-    duration_s: how long the sound lasted
-    amplitude: loudness 0.0-1.0 (0.1 = soft breath, 0.9 = loud tap)
-    user_prompt: optional intent hint ("make it a cello", "slow and gentle")
-    """
-    import math
-    # build note name from Hz
-    names = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
-    midi = round(12 * math.log2(max(pitch_hz, 20) / 440) + 69)
-    midi = max(0, min(127, midi))
-    pitch_name = f"{names[midi % 12]}{(midi // 12) - 1}"
-
-    digest = {
-        "duration": duration_s,
-        "averageEnergy": amplitude,
-        "peakOnsetCount": 1,
-        "events": [
-            {"time": 0.0, "frequency": pitch_hz,
-             "pitchName": pitch_name, "amplitude": amplitude}
-        ]
-    }
-
-    response = requests.post(
-        "http://localhost:3000/api/interpret",
-        json={"dspDigest": digest, "userPrompt": user_prompt},
-        timeout=90
-    )
-    return response.json()
-
-
-def generate_music_from_profile(profile: str) -> dict:
-    """
-    Generate music for a known disability profile.
-    profile: one of 'breath', 'hum', 'tremor', 'tap', 'click', 'puff', 'whistle'
-    """
-    profiles = {
-        "breath":  (180,  2.5, 0.03, "minimal breath, ambient drone"),
-        "hum":     (220,  3.0, 0.11, "gentle sustained hum, cello"),
-        "tremor":  (196,  2.0, 0.08, "tremor hum, treat as vibrato"),
-        "tap":     (440,  0.2, 0.45, "single finger tap, percussive"),
-        "click":   (800,  0.1, 0.60, "tongue click, sharp and short"),
-        "puff":    (120,  1.5, 0.05, "breath puff, soft and round"),
-        "whistle": (1047, 0.8, 0.30, "single whistle note, clear pitch"),
-    }
-    hz, dur, amp, prompt = profiles.get(profile, profiles["hum"])
-    return generate_music(hz, dur, amp, prompt)
+generate_music(pitch_hz, duration_s, amplitude, user_prompt)  # from raw Hz
+generate_music_from_profile(profile)       # 'breath', 'hum', 'tremor', 'tap', 'click', 'puff', 'whistle'
+generate_music_from_events(events, prompt) # multi-onset sequence
 ```
 
 ### Step 4: Use it via Hermes Agent
