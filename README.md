@@ -4,6 +4,13 @@
 
 # babbled notes v2
 
+> Submitted to the [Google Gemma Challenge](https://dev.to/challenges/google-gemma-2026-05-06) and [Hermes Agent Challenge](https://dev.to/challenges/hermes-agent-2026-05-15) on DEV.to.
+
+**GitHub:** https://github.com/brookehoward2008-droid/Babbled-notes-v2
+**Live app (v1):** https://ai.studio/apps/4d235490-15ac-47a5-9599-f82aa85a2b57
+
+---
+
 Make any sound. Hum, tap, whistle, breathe into your mic.
 
 babbled notes listens. It finds the music hiding in that sound, translates it into a Lilt score using Gemini 2.0 Flash, and plays it back as piano, cello, marimba, or drums -- something you actually want to hear.
@@ -84,6 +91,8 @@ The Lilt score appears as an editable piano roll. You can change the voice, edit
 
 Full results: `test-results.json` -- every Gemini response, every mood, voice, and note count, timestamped.
 
+Test runner: [`test-runner.mjs`](./test-runner.mjs)
+
 ---
 
 ## How to run
@@ -138,6 +147,17 @@ Fires 32 disability-profile DSP tests at the live server. Saves every Gemini res
 - Model updated to gemini-2.0-flash
 - 32-test disability profile suite
 - App runs end to end
+
+---
+
+---
+
+## Contest submissions
+
+| Challenge | Track | Tags | Deadline |
+|---|---|---|---|
+| [Google Gemma Challenge](https://dev.to/challenges/google-gemma-2026-05-06) | Build With Gemma 4 | `devchallenge` `gemmachallenge` `gemma` | May 24, 2026 |
+| [Hermes Agent Challenge](https://dev.to/challenges/hermes-agent-2026-05-15) | Build | `hermesagentchallenge` `devchallenge` `agents` | May 31, 2026 |
 
 ---
 
