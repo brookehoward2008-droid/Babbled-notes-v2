@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --ignore \"*.timestamp-*\" server.ts",
-    "build": "vite build",
+    "dev": "node scripts/use-source-index.mjs && tsx watch --ignore \"*.timestamp-*\" server.ts",
+    "build": "node scripts/use-source-index.mjs && vite build && node scripts/publish-pages-root.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
