@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { LiltAudioEngine } from "./lib/audioEngine";
 import { DspAnalyzer } from "./lib/dspAnalyzer";
+import { generateLocalSong } from "./lib/localInterpreter";
 import { LiltSong } from "./types";
 import NeuralGem from "./components/NeuralGem";
 import RecordButton from "./components/RecordButton";
@@ -62,14 +63,20 @@ export default function App() {
       try {
         const { digest, audioBase64 } = await dspAnalyzer.stopRecording();
 
-        const res = await fetch("/api/interpret", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ dspDigest: digest, audioBase64, userPrompt: "" }),
-        });
+        let data: LiltSong;
+        try {
+          const res = await fetch("/api/interpret", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ dspDigest: digest, audioBase64, userPrompt: "" }),
+          });
 
-        if (!res.ok) throw new Error(`Server error ${res.status}`);
-        const data: LiltSong = await res.json();
+          if (!res.ok) throw new Error(`Server error ${res.status}`);
+          data = await res.json();
+        } catch {
+          data = generateLocalSong(digest);
+        }
+
         setSong(data);
         setAppState("playing");
       } catch (e: any) {
